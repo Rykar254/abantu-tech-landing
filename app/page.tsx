@@ -5,6 +5,7 @@ import { BenchmarksSection } from "@/components/benchmarks-section"
 import { EngagementModels } from "@/components/engagement-models"
 import { ContactFooter } from "@/components/contact-footer"
 import { AtsLeadModal } from "@/components/ats-lead-modal"
+import { ServiceBookingModal } from "@/components/service-booking-modal"
 
 export default function Page() {
   return (
@@ -24,6 +25,7 @@ export default function Page() {
         <ContactFooter />
       </main>
       <AtsLeadModal />
+      <ServiceBookingModal />
     </>
   )
 }

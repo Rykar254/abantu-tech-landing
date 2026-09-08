@@ -1,93 +1,25 @@
+"use client"
+
 import { TrendingUp, Settings2, Brain, Check, ArrowRight, ShieldCheck } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 import { FlankMotif } from "@/components/flank-motif"
+import { useServiceBookingModal } from "@/components/service-booking-modal"
+import { serviceTiers, toneStyles, type ServiceTierSlug } from "@/lib/service-tiers"
 import { cn } from "@/lib/utils"
 
-// Tone-keyed style lookup — replaces the old two-state isGold boolean now that a third
-// (purple) tone exists. Each tone supplies every className fragment the card needs.
-const toneStyles = {
-  gold: {
-    bar: "bg-gold",
-    chip: "border-gold/40 bg-gold/10 text-gold-foreground",
-    text: "text-gold-foreground",
-    check: "text-gold",
-    ctaBorder: "border-gold/40",
-    hoverBorder: "hover:border-gold focus-visible:border-gold",
-    hoverFill: "bg-gold",
-    hoverTrackBg: "group-hover:bg-gold-foreground/40 group-focus-visible:bg-gold-foreground/40",
-    hoverText: "group-hover:text-gold-foreground group-focus-visible:text-gold-foreground",
-    hoverArrowBorder: "group-hover:border-gold-foreground group-focus-visible:border-gold-foreground",
-  },
-  blue: {
-    bar: "bg-brand-blue",
-    chip: "border-brand-blue/30 bg-brand-blue/10 text-brand-blue",
-    text: "text-brand-blue",
-    check: "text-brand-blue",
-    ctaBorder: "border-brand-blue/30",
-    hoverBorder: "hover:border-brand-blue focus-visible:border-brand-blue",
-    hoverFill: "bg-brand-blue",
-    hoverTrackBg: "group-hover:bg-brand-blue-foreground/40 group-focus-visible:bg-brand-blue-foreground/40",
-    hoverText: "group-hover:text-brand-blue-foreground group-focus-visible:text-brand-blue-foreground",
-    hoverArrowBorder: "group-hover:border-brand-blue-foreground group-focus-visible:border-brand-blue-foreground",
-  },
-  purple: {
-    bar: "bg-brand-purple",
-    chip: "border-brand-purple/30 bg-brand-purple/10 text-brand-purple",
-    text: "text-brand-purple",
-    check: "text-brand-purple",
-    ctaBorder: "border-brand-purple/30",
-    hoverBorder: "hover:border-brand-purple focus-visible:border-brand-purple",
-    hoverFill: "bg-brand-purple",
-    hoverTrackBg: "group-hover:bg-brand-purple-foreground/40 group-focus-visible:bg-brand-purple-foreground/40",
-    hoverText: "group-hover:text-brand-purple-foreground group-focus-visible:text-brand-purple-foreground",
-    hoverArrowBorder: "group-hover:border-brand-purple-foreground group-focus-visible:border-brand-purple-foreground",
-  },
-} as const
+// Icons are React components, so this lookup stays here rather than in the plain-data
+// lib/service-tiers.ts module — keyed by slug to stay in sync with the shared tier data.
+const tierIcons: Record<ServiceTierSlug, LucideIcon> = {
+  growth: TrendingUp,
+  operations: Settings2,
+  transformation: Brain,
+}
 
-const phases = [
-  {
-    icon: TrendingUp,
-    tone: "gold" as const,
-    eyebrow: "GROWTH",
-    title: "Lead Growth Platform",
-    url: "https://go.abantutech.co.ke/growth/",
-    copy: "Grow revenue with intelligent lead capture and engagement.",
-    bullets: [
-      "Always-on lead capture",
-      "AI-powered lead qualification",
-      "Faster responses across WhatsApp, email, and calls",
-    ],
-  },
-  {
-    icon: Settings2,
-    tone: "blue" as const,
-    eyebrow: "OPERATIONS",
-    title: "Operations Intelligence Platform",
-    url: "https://go.abantutech.co.ke/operations/",
-    copy: "Reduce operational friction with AI-powered business assistance.",
-    bullets: [
-      "Draft quotations in minutes",
-      "Automate follow-ups and tasks",
-      "Instant access to business knowledge",
-      "Improve team productivity",
-    ],
-  },
-  {
-    icon: Brain,
-    tone: "purple" as const,
-    eyebrow: "TRANSFORMATION",
-    title: "Business AI Operating System",
-    url: "https://go.abantutech.co.ke/transformation/",
-    copy: "Build an AI-native organization with enterprise intelligence and autonomous operations.",
-    bullets: [
-      "Handles higher volume with ease",
-      "Deep automation across departments",
-      "Sovereign AI with full data ownership",
-      "Enterprise-grade intelligence layer",
-    ],
-  },
-]
+const phases = serviceTiers
 
 export function ServiceMatrix() {
+  const { openModal } = useServiceBookingModal()
+
   return (
     <section id="services" aria-labelledby="services-heading" className="scroll-mt-20 border-y border-border bg-secondary/40">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
@@ -107,7 +39,7 @@ export function ServiceMatrix() {
         <div className="relative mt-14">
           <div className="grid gap-6 lg:grid-cols-3">
             {phases.map((phase) => {
-              const Icon = phase.icon
+              const Icon = tierIcons[phase.slug]
               const styles = toneStyles[phase.tone]
               return (
                 <article
@@ -142,8 +74,9 @@ export function ServiceMatrix() {
                     ))}
                   </ul>
 
-                  <a
-                    href={phase.url}
+                  <button
+                    type="button"
+                    onClick={() => openModal({ slug: phase.slug, title: phase.title, url: phase.bookingUrl, tone: phase.tone })}
                     aria-label={`Explore ${phase.title}`}
                     className={cn(
                       "group relative mt-6 flex h-14 items-center justify-center overflow-hidden rounded-full border text-sm font-semibold transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
@@ -197,7 +130,7 @@ export function ServiceMatrix() {
                         )}
                       />
                     </span>
-                  </a>
+                  </button>
                 </article>
               )
             })}
