@@ -19,3 +19,5 @@ node_modules
 
 # Auto-generated, flips between dev/build path on Turbopack — not worth tracking
 next-env.d.ts
+
+ARCH/
