@@ -5,58 +5,68 @@ export type ServiceTierTone = "gold" | "blue" | "purple"
 export type ServiceTier = {
   slug: ServiceTierSlug
   tone: ServiceTierTone
+  tierNumber: 1 | 2 | 3
   eyebrow: string
   title: string
   copy: string
   bullets: string[]
   pageUrl: string
   bookingUrl: string
+  image: string
+  imageAlt: string
 }
 
 export const serviceTiers: ServiceTier[] = [
   {
     slug: "growth",
     tone: "gold",
+    tierNumber: 1,
     eyebrow: "GROWTH",
-    title: "Lead Growth Platform",
-    copy: "Grow revenue with intelligent lead capture and engagement.",
+    title: "ATS Growth Box",
+    copy: "Your business files, backups and office automations, in one box you own.",
     bullets: [
-      "Always-on lead capture",
-      "AI-powered lead qualification",
-      "Faster responses across WhatsApp, email, and calls",
+      "Every file in one place, backed up automatically.",
+      "Routine office tasks run on their own: reminders, reports, filing.",
+      "Your files stay reachable in the office even when the internet drops.",
     ],
     pageUrl: "/growth",
     bookingUrl: "https://go.abantutech.co.ke/growth/",
+    image: "/images/tiers/ats-growth-box-zimaboard-2.webp",
+    imageAlt: "ATS Growth Box device, illustrative render",
   },
   {
     slug: "operations",
     tone: "blue",
+    tierNumber: 2,
     eyebrow: "OPERATIONS",
-    title: "Operations Intelligence Platform",
-    copy: "Reduce operational friction with AI-powered business assistance.",
+    title: "ATS Operations Box",
+    copy: "An AI assistant that works from your own business information, inside your office.",
     bullets: [
-      "Draft quotations in minutes",
-      "Automate follow-ups and tasks",
-      "Instant access to business knowledge",
-      "Improve team productivity",
+      "Quotations drafted in minutes from your own price lists, checked by your team.",
+      "Staff get answers from your own documents instead of interrupting you.",
+      "Follow-ups tracked and prompted, so they don't depend on memory.",
     ],
     pageUrl: "/operations",
     bookingUrl: "https://go.abantutech.co.ke/operations/",
+    image: "/images/tiers/ats-operations-box-minisforum-ai-x1.webp",
+    imageAlt: "ATS Operations Box device, illustrative render",
   },
   {
     slug: "transformation",
     tone: "purple",
+    tierNumber: 3,
     eyebrow: "TRANSFORMATION",
-    title: "Business AI Operating System",
-    copy: "Build an AI-native organization with enterprise intelligence and autonomous operations.",
+    title: "ATS Transformation Box",
+    copy: "Private AI working across your whole business, for more people and heavier work.",
     bullets: [
-      "Handles higher volume with ease",
-      "Deep automation across departments",
-      "Sovereign AI with full data ownership",
-      "Enterprise-grade intelligence layer",
+      "Automation that spans sales, operations and customer service.",
+      "Larger AI models for longer documents and more complex work.",
+      "Room for more of your team to use it at once.",
     ],
     pageUrl: "/transformation",
     bookingUrl: "https://go.abantutech.co.ke/transformation/",
+    image: "/images/tiers/ats-transformation-box-gmktec-evo-x2.webp",
+    imageAlt: "ATS Transformation Box device, illustrative render",
   },
 ]
 

@@ -1,19 +1,11 @@
 "use client"
 
-import { TrendingUp, Settings2, Brain, Check, ArrowRight, ShieldCheck } from "lucide-react"
-import type { LucideIcon } from "lucide-react"
+import Image from "next/image"
+import { ArrowRight, ShieldCheck } from "lucide-react"
 import { FlankMotif } from "@/components/flank-motif"
 import { useServiceBookingModal } from "@/components/service-booking-modal"
-import { serviceTiers, toneStyles, type ServiceTierSlug } from "@/lib/service-tiers"
+import { serviceTiers, toneStyles } from "@/lib/service-tiers"
 import { cn } from "@/lib/utils"
-
-// Icons are React components, so this lookup stays here rather than in the plain-data
-// lib/service-tiers.ts module — keyed by slug to stay in sync with the shared tier data.
-const tierIcons: Record<ServiceTierSlug, LucideIcon> = {
-  growth: TrendingUp,
-  operations: Settings2,
-  transformation: Brain,
-}
 
 const phases = serviceTiers
 
@@ -25,21 +17,20 @@ export function ServiceMatrix() {
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <FlankMotif tone="blue" className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-blue">
-            Growth Path
+            Our Solutions
           </FlankMotif>
           <h2 id="services-heading" className="mt-5 text-balance text-3xl font-bold tracking-tight text-ink sm:text-4xl">
             How clients grow with ATS
           </h2>
           <p className="mt-4 text-pretty text-muted-foreground">
-            Start with more leads. Then remove internal friction. Then scale into a fuller local AI
-            operating layer.
+            Three solutions that work alone or together. Start with the one that fits your business today,
+            and add to it as you grow.
           </p>
         </div>
 
         <div className="relative mt-14">
           <div className="grid gap-6 lg:grid-cols-3">
             {phases.map((phase) => {
-              const Icon = tierIcons[phase.slug]
               const styles = toneStyles[phase.tone]
               return (
                 <article
@@ -47,32 +38,23 @@ export function ServiceMatrix() {
                   className="group relative flex flex-col rounded-xl border border-border bg-card p-7 shadow-sm ring-1 ring-transparent transition-all hover:-translate-y-1 hover:border-gold/60 hover:shadow-md"
                 >
                   <span aria-hidden="true" className={cn("absolute inset-x-0 top-0 h-1 rounded-t-xl", styles.bar)} />
-                  <div className="flex items-center justify-between gap-3">
-                    <span
-                      className={cn(
-                        "inline-flex size-12 items-center justify-center rounded-lg border",
-                        styles.chip,
-                      )}
-                    >
-                      <Icon className="size-6" aria-hidden="true" />
-                    </span>
-                    <span className={cn("text-xs font-semibold uppercase tracking-[0.14em]", styles.text)}>
-                      {phase.eyebrow}
-                    </span>
+                  <div className="relative mx-auto aspect-square w-full max-w-[200px]">
+                    <Image
+                      src={phase.image}
+                      alt={phase.imageAlt}
+                      fill
+                      className="object-contain"
+                      sizes="200px"
+                    />
                   </div>
 
-                  <h3 className={cn("mt-5 text-lg font-semibold leading-snug", styles.text)}>{phase.title}</h3>
+                  <span className={cn("mt-5 text-xs font-semibold uppercase tracking-[0.14em]", styles.text)}>
+                    TIER {phase.tierNumber} · {phase.eyebrow}
+                  </span>
 
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{phase.copy}</p>
+                  <h3 className={cn("mt-2 text-lg font-semibold leading-snug", styles.text)}>{phase.title}</h3>
 
-                  <ul className="mt-6 flex-1 space-y-2.5 border-t border-border pt-5">
-                    {phase.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-2.5 text-sm text-foreground/90">
-                        <Check className={cn("mt-0.5 size-4 shrink-0", styles.check)} aria-hidden="true" />
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{phase.copy}</p>
 
                   <button
                     type="button"
@@ -110,7 +92,7 @@ export function ServiceMatrix() {
                         styles.text,
                       )}
                     >
-                      Explore this platform
+                      Explore this solution
                     </span>
 
                     {/* arrow circle sliding left to right along the rail */}
@@ -136,17 +118,6 @@ export function ServiceMatrix() {
             })}
           </div>
 
-          {/* Connector arrows between adjacent cards — decorative only, lg+ (three-column) layout only.
-              Positioned level with the icon-badge/eyebrow row near the top of the cards, not the card's
-              vertical centre. Neutral gray regardless of which tones they sit between. */}
-          <div className="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden="true">
-            <span className="absolute left-1/3 top-14 flex size-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card shadow-sm">
-              <ArrowRight className="size-5 text-muted-foreground" />
-            </span>
-            <span className="absolute left-2/3 top-14 flex size-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card shadow-sm">
-              <ArrowRight className="size-5 text-muted-foreground" />
-            </span>
-          </div>
         </div>
 
         <div className="mt-14 flex flex-col items-center text-center sm:mt-16">
@@ -157,7 +128,7 @@ export function ServiceMatrix() {
             </p>
           </div>
           <p className="mt-2 text-sm font-normal text-muted-foreground">
-            From first lead to full-scale transformation — we grow with you.
+            Whichever you choose, it runs in your office, belongs to you, and we keep it running.
           </p>
         </div>
       </div>

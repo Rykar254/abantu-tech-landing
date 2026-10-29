@@ -21,3 +21,5 @@ node_modules
 next-env.d.ts
 
 ARCH/
+# TypeScript incremental build info
+tsconfig.tsbuildinfo

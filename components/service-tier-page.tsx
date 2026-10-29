@@ -118,7 +118,7 @@ export function ServiceTierPage({ tier }: { tier: ServiceTier }) {
             <button
               type="button"
               onClick={() => openModal({ slug: tier.slug, title: tier.title, url: tier.bookingUrl, tone: tier.tone })}
-              aria-label={`Book a ${tier.title} session`}
+              aria-label={`Book an ${tier.title} session`}
               data-analytics-event={`service_modal_open_${tier.slug}`}
               className={cn(
                 "inline-flex min-h-11 items-center justify-center gap-2 rounded-md border px-8 py-3.5 text-sm font-semibold shadow-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",

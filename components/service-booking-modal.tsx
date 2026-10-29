@@ -120,7 +120,7 @@ export function ServiceBookingModal() {
       >
         <div className={cn("relative flex shrink-0 items-center justify-between gap-4 border-b border-border bg-ink px-5 py-4 sm:px-6")}>
           <h2 id="service-booking-modal-heading" className="text-lg font-bold text-white">
-            Book a <span className={styles.text}>{service.title}</span> session
+            Book an <span className={styles.text}>{service.title}</span> session
           </h2>
           <button
             type="button"
@@ -137,7 +137,7 @@ export function ServiceBookingModal() {
           <iframe
             key={service.url}
             src={service.url}
-            title={`Book a ${service.title} session`}
+            title={`Book an ${service.title} session`}
             className="absolute inset-0 size-full border-0"
             loading="lazy"
           />

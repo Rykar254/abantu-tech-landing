@@ -1,26 +1,19 @@
-import { Activity, ShieldCheck, Lock } from "lucide-react"
+import { Clock, Lock } from "lucide-react"
 import { FlankMotif } from "@/components/flank-motif"
 
 const metrics = [
   {
-    icon: Activity,
-    value: "99.9%",
-    label: "Fewer Outages",
-    copy: "Your systems stay up and running, so your business never grinds to a halt.",
-    tone: "gold" as const,
-  },
-  {
-    icon: ShieldCheck,
-    value: "Zero-Trust",
-    label: "Safer Access",
-    copy: "Strict access controls keep the wrong people out, even as your team grows.",
+    icon: Clock,
+    value: "1 Business Day",
+    label: "Support Reply Time",
+    copy: "Support by WhatsApp or email, reply within one business day.",
     tone: "blue" as const,
   },
   {
     icon: Lock,
     value: "100%",
-    label: "Data Under Your Control",
-    copy: "Your business information stays yours — never locked into a third-party platform.",
+    label: "Of Your Box's Data Stays in Your Office",
+    copy: "The data on your ATS box is stored and processed on hardware in your office.",
     tone: "gold" as const,
   },
 ]
@@ -38,7 +31,7 @@ export function BenchmarksSection() {
           </h2>
         </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-3">
+        <div className="mx-auto mt-14 grid max-w-3xl gap-6 sm:grid-cols-2">
           {metrics.map((m) => {
             const Icon = m.icon
             const accent = m.tone === "gold" ? "text-gold-foreground" : "text-brand-blue"

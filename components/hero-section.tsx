@@ -82,12 +82,6 @@ export function HeroSection() {
               />
             </div>
           </div>
-
-          {/* floating stat chip */}
-          <div className="absolute -bottom-5 -left-5 hidden rounded-xl border border-border bg-card px-5 py-3 shadow-lg sm:block">
-            <p className="font-mono text-2xl font-bold text-brand-blue">99.9%</p>
-            <p className="text-xs font-medium text-muted-foreground">Reliable uptime</p>
-          </div>
         </div>
       </div>
     </section>
