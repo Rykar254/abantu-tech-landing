@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { ArrowRight, ShieldCheck, Clock, MessageSquare } from "lucide-react"
+import { ArrowRight, ShieldCheck, Clock, ClipboardCheck } from "lucide-react"
 import { FlankMotif } from "@/components/flank-motif"
 import { useAtsLeadModal } from "@/components/ats-lead-modal"
 
@@ -46,15 +46,15 @@ export function HeroSection() {
             </a>
           </div>
 
-          <dl className="mt-10 grid max-w-md grid-cols-3 gap-4">
+          <dl className="mt-10 grid max-w-md grid-cols-3 gap-4 sm:flex sm:max-w-none sm:gap-x-10">
             {[
               { icon: Clock, label: "Faster response times" },
-              { icon: MessageSquare, label: "Less admin work" },
-              { icon: ShieldCheck, label: "Data under your control" },
+              { icon: ClipboardCheck, label: "Admin time saved" },
+              { icon: ShieldCheck, label: "On-site systems you control" },
             ].map(({ icon: Icon, label }) => (
               <div key={label} className="flex flex-col gap-2">
                 <Icon className="size-5 text-brand-blue" aria-hidden="true" />
-                <dt className="text-xs font-medium leading-snug text-muted-foreground">{label}</dt>
+                <dt className="text-xs font-medium leading-snug text-muted-foreground sm:whitespace-nowrap">{label}</dt>
               </div>
             ))}
           </dl>
